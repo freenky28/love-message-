@@ -121,6 +121,10 @@ h1 {
     cursor: pointer;
 }
 
+.love-btn:hover {
+    transform: scale(1.05);
+}
+
 /* FINAL MESSAGE */
 
 #final {
@@ -267,4 +271,40 @@ h1 {
 
             I LOVE YOU SO MUCH! ❤️🥺
 
-      
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function openLetter() {
+    document.getElementById('cover').style.display = 'none';
+    document.getElementById('letter').style.display = 'block';
+    createHearts();
+}
+
+function showFinal() {
+    document.getElementById('final').style.display = 'block';
+    createHearts();
+}
+
+function createHearts() {
+    for (let i = 0; i < 5; i++) {
+        setTimeout(() => {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.textContent = '❤️';
+            heart.style.left = Math.random() * 100 + '%';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 5000);
+        }, i * 100);
+    }
+}
+
+</script>
+
+</body>
+</html>
