@@ -41,6 +41,12 @@ body {
 h1 {
     color: #e91e63;
     font-size: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+h1:hover {
+    transform: scale(1.05);
 }
 
 /* CLICK BUTTON */
@@ -62,11 +68,19 @@ h1 {
     transform: scale(1.08);
 }
 
+.open-btn:active {
+    transform: scale(0.95);
+}
+
 /* LETTER */
 
 #letter {
     display: none;
     animation: openLetter 1s ease;
+}
+
+#letter.show {
+    display: block;
 }
 
 @keyframes openLetter {
@@ -97,6 +111,13 @@ h1 {
     line-height: 1.7;
     margin: 15px 0;
     box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.message p:hover {
+    transform: translateX(5px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
 }
 
 /* SPECIAL LAST MESSAGE */
@@ -119,10 +140,17 @@ h1 {
     color: white;
     font-size: 16px;
     cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(233,30,99,0.3);
 }
 
 .love-btn:hover {
-    transform: scale(1.05);
+    transform: scale(1.08);
+    box-shadow: 0 6px 15px rgba(233,30,99,0.4);
+}
+
+.love-btn:active {
+    transform: scale(0.95);
 }
 
 /* FINAL MESSAGE */
@@ -134,6 +162,10 @@ h1 {
     font-size: 25px;
     font-weight: bold;
     animation: heartbeat 1s infinite;
+}
+
+#final.show {
+    display: block;
 }
 
 @keyframes heartbeat {
@@ -160,6 +192,7 @@ h1 {
     font-size: 25px;
     pointer-events: none;
     animation: float 5s linear forwards;
+    z-index: 9999;
 }
 
 @keyframes float {
@@ -176,6 +209,32 @@ h1 {
 
 }
 
+/* BACK BUTTON */
+
+.back-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: 2px solid #e91e63;
+    background: transparent;
+    color: #e91e63;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    background: #e91e63;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* CLICKABLE TEXT */
+
+p {
+    cursor: pointer;
+}
+
 </style>
 </head>
 
@@ -187,13 +246,13 @@ h1 {
 
     <div id="cover">
 
-        <h1>💌 For My Love</h1>
+        <h1 onclick="openLetter()">💌 For My Love</h1>
 
-        <p>
+        <p onclick="openLetter()">
             Hi love 🥺❤️
         </p>
 
-        <p>
+        <p onclick="openLetter()">
             I made something special just for you...
         </p>
 
@@ -208,15 +267,15 @@ h1 {
 
     <div id="letter">
 
-        <h1>Dear My Love ❤️</h1>
+        <h1 onclick="goBack()">Dear My Love ❤️</h1>
 
         <div class="message">
 
-            <p>
+            <p onclick="createHearts()">
                 Hi love, miss you 🥺❤️
             </p>
 
-            <p>
+            <p onclick="createHearts()">
                 Hi love, kabalo ko nga kapoy na kaayo ka sa acads,
                 daghan kaayog buhaton ug murag walay time para makapahuway.
                 Pero gusto lang nako ipahinumdom nimo nga proud kaayo ko nimo. 🥹❤️
@@ -224,7 +283,7 @@ h1 {
                 and that's one of the things I admire about you.
             </p>
 
-            <p>
+            <p onclick="createHearts()">
                 Ayaw kalimot ug pahuway ha?
                 Dili kinahanglan nga strong ka pirmi.
                 If kapoy na, pahulay sa kadali, breathe,
@@ -236,20 +295,20 @@ h1 {
                 Ako bahala nimo. 😚
             </p>
 
-            <p>
+            <p onclick="createHearts()">
                 I hope bisan gamay, nakasmile ka while reading this.
                 Kay kung ako lang, gusto nako nga kada open nimo
                 sa akong message, mabawasan bisan gamay imong kapoy. 🥺💗
             </p>
 
-            <p>
+            <p onclick="createHearts()">
                 Padayon lang, love. Kaya nimo na.
                 And please remember, dili ka alone sa imong kakapoy.
                 Naa kay someone nga ga-support nimo,
                 ga proud nimo, ug nagmahal nimo always. ❤️
             </p>
 
-            <p class="special">
+            <p class="special" onclick="createHearts()">
 
                 Now, smile na diha oh 😚🫶
 
@@ -273,6 +332,10 @@ h1 {
 
         </div>
 
+        <button class="back-btn" onclick="goBack()">
+            ← Back to Start
+        </button>
+
     </div>
 
 </div>
@@ -281,13 +344,19 @@ h1 {
 
 function openLetter() {
     document.getElementById('cover').style.display = 'none';
-    document.getElementById('letter').style.display = 'block';
+    document.getElementById('letter').classList.add('show');
     createHearts();
 }
 
 function showFinal() {
-    document.getElementById('final').style.display = 'block';
+    document.getElementById('final').classList.add('show');
     createHearts();
+}
+
+function goBack() {
+    document.getElementById('cover').style.display = 'block';
+    document.getElementById('letter').classList.remove('show');
+    document.getElementById('final').classList.remove('show');
 }
 
 function createHearts() {
